@@ -10,24 +10,18 @@ public interface WorkerFace {
      * Write something new to the data store.
      * @return
      */
-    boolean write();
+    boolean write(String key);
 
     /**
      * Read something from the data store.
      * @return
      */
-    boolean read();
+    boolean read(String key);
 
     /**
      * Update existing data within the data store.
      * @return
      */
-    boolean update();
-
-    /**
-     * Do nothing...
-     * @return
-     */
-    boolean doNothing();
+    boolean update(String key);
 
 }

@@ -5,19 +5,23 @@ package uk.ac.ncl.provrun.worker;
  */
 public class ProvWorker implements WorkerFace{
 
-    public boolean write() {
+    //A worker will:
+    //  write new documents
+    //  read exisiting documents
+    //  update exisitng
+
+    public boolean write(String key) {
         return false;
     }
 
-    public boolean read() {
+    public boolean read(String key) {
         return false;
     }
 
-    public boolean update() {
+    public boolean update(String key) {
         return false;
     }
 
-    public boolean doNothing() {
-        return false;
-    }
+
+
 }
