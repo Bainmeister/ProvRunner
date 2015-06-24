@@ -1,26 +1,22 @@
 package uk.ac.ncl.provrun.datastore;
 
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import junit.framework.TestCase;
 
 /**
- * Created by simon on 23/06/15.
+ * Created by simon on 24/06/15.
  */
-public class MongoConnTest {
+public class MongoConnTest extends TestCase {
 
-    @Test
-    public void testDefaultConstuctor() {
-
-        MongoConn conn = new MongoConn();
-        assertNotNull(conn);
+    public void testConnect() throws Exception {
 
     }
 
-    @Test
-    public void testConstuctor() {
-        MongoConn conn = new MongoConn("test", "collection");
-        assertNotNull(conn);
+    public void testConnect1() throws Exception {
+
+    }
+
+    public void testDisconnect() throws Exception {
+
     }
 
 }

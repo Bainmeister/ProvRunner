@@ -8,26 +8,22 @@ import uk.ac.ncl.provrun.datastore.MongoAction;
  */
 public class MongoWorker implements WorkerFace {
 
-    //A worker will:
-    //  write new documents
-    //  read exisiting documents
-    //  update exisitng
-
     private MongoCollection collection;
     private MongoAction act = new MongoAction(collection);
 
-
-    //We don't want anybody setting upwithout specifying the collection that the worker should be using
+    /*
+        We require a collection, so block the standard constructor.
+     */
     private MongoWorker(){}
     MongoWorker(MongoCollection collection){this.collection = collection;}
 
-
+    //Perform the MongoAction of writing
     public boolean write(String key) { return act.write(key); }
 
-    public boolean read(String key) {
-        return act.read(key);
-    }
+    //Perform the MongoAction of reading
+    public boolean read(String key) { return act.read(key); }
 
-    public boolean update(String key) { return (read(key) && write(key) ? true : false); }
-    
+    //Perform the MongoAction of reading and then the mongo action of writing
+    public boolean update(String key) { return (read(key) && write(key)); }
+
 }
