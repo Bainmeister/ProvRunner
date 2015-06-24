@@ -3,7 +3,7 @@ package uk.ac.ncl.provrun.datastore;
 /**
  * Created by simon on 23/06/15.
  */
-public interface DataAction {
+public interface DataAction<T> {
 
     /**
      * Reads a document wuth the relevant key (if it exists)

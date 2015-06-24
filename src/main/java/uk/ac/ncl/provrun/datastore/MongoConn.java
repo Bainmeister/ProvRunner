@@ -19,11 +19,11 @@ public class MongoConn implements DataConn {
     /**
      * Constructors connect to default DB unless otherwise instructed.
      */
-    MongoConn(){
+    public MongoConn(){
         connect();
     }
 
-    MongoConn(String db, String collection){
+    public MongoConn(String db, String collection){
         connect(db,collection);
     }
 

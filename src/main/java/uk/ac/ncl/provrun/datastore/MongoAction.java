@@ -1,10 +1,6 @@
 package uk.ac.ncl.provrun.datastore;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by simon on 23/06/15.

@@ -3,7 +3,7 @@ package uk.ac.ncl.provrun.datastore;
 /**
  * Created by simon on 23/06/15.
  */
-public interface DataConn {
+public interface DataConn<T> {
 
     boolean connect();
 
