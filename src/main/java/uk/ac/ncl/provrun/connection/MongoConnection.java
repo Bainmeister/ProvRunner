@@ -1,4 +1,4 @@
-package uk.ac.ncl.provrun.datastore;
+package uk.ac.ncl.provrun.connection;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -8,7 +8,7 @@ import com.mongodb.client.MongoDatabase;
  * Created by simon on 23/06/15.
  * We only need ONE CONNECTION for all of the calls
  */
-public class MongoConn implements DataConn {
+public class MongoConnection implements DataConnection {
 
     //Connection details
     private MongoClient mongoClient;
@@ -19,11 +19,11 @@ public class MongoConn implements DataConn {
     /**
      * Constructors connect to default DB unless otherwise instructed.
      */
-    public MongoConn(){
+    public MongoConnection(){
         connect();
     }
 
-    public MongoConn(String db, String collection){
+    public MongoConnection(String db, String collection){
         connect(db,collection);
     }
 
@@ -35,12 +35,6 @@ public class MongoConn implements DataConn {
      */
      public boolean connect(String dbname, String collectionName){
 
-
-         return true;
-         /*
-
-
-         //TODO
          // Connect the client, the db, and the collection.
          mongoClient = new MongoClient("localhost" , 27017);
 
@@ -53,7 +47,7 @@ public class MongoConn implements DataConn {
          //We assume all the other steps work if we have a client.
          return  (mongoClient == null) ? false : true;
 
-         */
+
     }
 
     /**

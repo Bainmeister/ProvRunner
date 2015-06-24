@@ -1,4 +1,4 @@
-package uk.ac.ncl.provrun.datastore;
+package uk.ac.ncl.provrun.connection;
 
 import junit.framework.TestCase;
 

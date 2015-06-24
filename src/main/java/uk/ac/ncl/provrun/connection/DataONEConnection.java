@@ -1,9 +1,9 @@
-package uk.ac.ncl.provrun.datastore;
+package uk.ac.ncl.provrun.connection;
 
 /**
  * Created by simon on 23/06/15.
  */
-public class DataONEConn implements DataConn {
+public class DataONEConnection implements DataConnection {
 
     /**
      * Connect to the default database and collection

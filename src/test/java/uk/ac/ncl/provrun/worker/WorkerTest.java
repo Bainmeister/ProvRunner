@@ -5,12 +5,15 @@ import junit.framework.TestCase;
 /**
  * Created by simon on 24/06/15.
  */
-public class FileWorkerTest extends TestCase {
+public class WorkerTest extends TestCase {
 
+    //TODO populate rules and test.
     public void testConstruction() throws Exception {
-        FileWorker f;
-        f = new FileWorker("/home/simon/Documents");
+        Worker f;
+        f = new Worker(new WorkerRules());
         assertNotNull(f);
     }
+
+
 
 }

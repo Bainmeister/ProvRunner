@@ -1,4 +1,4 @@
-package uk.ac.ncl.provrun.datastore;
+package uk.ac.ncl.provrun.connection;
 
 import junit.framework.TestCase;
 
@@ -8,12 +8,12 @@ import junit.framework.TestCase;
 public class DataONEConnTest extends TestCase {
 
     public void testConnect() throws Exception {
-        DataONEConn conn = new DataONEConn();
+        DataONEConnection conn = new DataONEConnection();
         assertEquals(conn.connect(), true);
     }
 
     public void testDisconnect() throws Exception {
-        DataONEConn conn = new DataONEConn();
+        DataONEConnection conn = new DataONEConnection();
         assertEquals(conn.disconnect(), true);
     }
 }

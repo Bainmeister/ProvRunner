@@ -1,4 +1,4 @@
-package uk.ac.ncl.provrun.datastore;
+package uk.ac.ncl.provrun.connection;
 
 import junit.framework.TestCase;
 
@@ -9,17 +9,17 @@ public class MongoConnTest extends TestCase {
 
 
     public void testConnect() throws Exception {
-        MongoConn conn = new MongoConn();
+        MongoConnection conn = new MongoConnection();
         assertEquals(conn.connect(),true);
     }
 
     public void testConnect1() throws Exception {
-        MongoConn conn = new MongoConn();
+        MongoConnection conn = new MongoConnection();
         assertEquals(conn.connect("test","prov"), true);
     }
 
     public void testDisconnect() throws Exception {
-        MongoConn conn = new MongoConn();
+        MongoConnection conn = new MongoConnection();
         assertEquals(conn.disconnect(), true);
     }
 

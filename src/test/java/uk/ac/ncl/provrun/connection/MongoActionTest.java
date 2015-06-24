@@ -1,4 +1,4 @@
-package uk.ac.ncl.provrun.datastore;
+package uk.ac.ncl.provrun.connection;
 
 import junit.framework.TestCase;
 
@@ -9,13 +9,13 @@ public class MongoActionTest extends TestCase {
 
     //TODO - ensure an @before and an @after adds and removes any relevant keys
     public void testRead() throws Exception {
-        MongoAction act = new MongoAction(new MongoConn().getCollection());
+        MongoAction act = new MongoAction(new MongoConnection().getCollection());
         assertEquals(act.read("key"),true);
     }
 
     //TODO - ensure an @before and an @after adds and removes any relevant keys
     public void testWrite() throws Exception {
-        MongoAction act = new MongoAction(new MongoConn().getCollection());
+        MongoAction act = new MongoAction(new MongoConnection().getCollection());
         assertEquals(act.write("key"),true);
     }
 }
