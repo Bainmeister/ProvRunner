@@ -35,6 +35,12 @@ public class MongoConn implements DataConn {
      */
      public boolean connect(String dbname, String collectionName){
 
+
+         return true;
+         /*
+
+
+         //TODO
          // Connect the client, the db, and the collection.
          mongoClient = new MongoClient("localhost" , 27017);
 
@@ -46,6 +52,8 @@ public class MongoConn implements DataConn {
 
          //We assume all the other steps work if we have a client.
          return  (mongoClient == null) ? false : true;
+
+         */
     }
 
     /**
@@ -64,7 +72,11 @@ public class MongoConn implements DataConn {
         mongoClient = null;
         db = null;
         collection = null;
-
         return true;
     }
+
+    public MongoCollection getCollection() {
+        return collection;
+    }
+
 }

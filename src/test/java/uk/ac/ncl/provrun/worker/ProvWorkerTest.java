@@ -7,4 +7,15 @@ import junit.framework.TestCase;
  */
 public class ProvWorkerTest extends TestCase {
 
+    public void testWrite() throws Exception {
+
+    }
+
+    public void testRead() throws Exception {
+
+    }
+
+    public void testUpdate() throws Exception {
+
+    }
 }

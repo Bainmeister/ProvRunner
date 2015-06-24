@@ -7,16 +7,20 @@ import junit.framework.TestCase;
  */
 public class MongoConnTest extends TestCase {
 
-    public void testConnect() throws Exception {
 
+    public void testConnect() throws Exception {
+        MongoConn conn = new MongoConn();
+        assertEquals(conn.connect(),true);
     }
 
     public void testConnect1() throws Exception {
-
+        MongoConn conn = new MongoConn();
+        assertEquals(conn.connect("test","prov"), true);
     }
 
     public void testDisconnect() throws Exception {
-
+        MongoConn conn = new MongoConn();
+        assertEquals(conn.disconnect(), true);
     }
 
 }

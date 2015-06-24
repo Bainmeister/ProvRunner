@@ -31,7 +31,7 @@ public class MongoAction implements DataAction {
      */
     public boolean read(String key) {
         //TODO
-        return false;
+        return true;
     }
 
 
@@ -41,7 +41,7 @@ public class MongoAction implements DataAction {
      */
     public boolean write(String key) {
         //TODO
-        return false;
+        return true;
 
     }
 }
