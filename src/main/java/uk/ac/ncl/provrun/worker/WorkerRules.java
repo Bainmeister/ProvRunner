@@ -1,18 +1,20 @@
 package uk.ac.ncl.provrun.worker;
 
+import uk.ac.ncl.provrun.dataMachine.DataType;
+
 /**
  * Created by simon on 24/06/15.
  */
 public class WorkerRules {
 
 
-    private String directory;
+
 
     private String mongoDB;
 
     private String mongoCollection;
 
-    private int dataType;
+    private final int dataType;
 
     //The possibility of doing one or the other... must sum to exactly 100.
     private final int readChance;
@@ -26,9 +28,13 @@ public class WorkerRules {
     private final int batches;
     private final int batchSize;
 
+    private final String directory;
+    private boolean display = false;
+
 
     //Some rules must not be changed while the object is being used.
-    public WorkerRules(int readChance, int insertChance, int updateChance, int minActions, int maxAxtions, int batchNumber, int batchSize){
+    public WorkerRules(int dataType, int readChance, int insertChance, int updateChance, int minActions, int maxAxtions, int batchNumber, int batchSize, String directory){
+        this.dataType = dataType;
         this.readChance = readChance;
         this.insertChance = insertChance;
         this.updateChance = updateChance;
@@ -40,6 +46,7 @@ public class WorkerRules {
         this.batches = batchNumber;
         this.batchSize = batchSize;
 
+        this.directory = directory;
 
         //Do some validation
 
@@ -54,6 +61,13 @@ public class WorkerRules {
 
         if (batchNumber<=0 || batchSize <=0)
             throw new IllegalArgumentException("Batch number/size must be greater than 0");
+
+        if (!(dataType == DataType.DATAONE || dataType == DataType.FILE_STORE || dataType == DataType.MONGODB))
+            throw new IllegalArgumentException("Must select a valid datatype - see DataType!");
+
+        if (directory == null || directory.equals(""))
+            throw new IllegalArgumentException("Missing filepath");
+
     }
 
     //READ chance
@@ -71,9 +85,6 @@ public class WorkerRules {
     //DIRECTORY
     public String getDirectory() {
         return directory;
-    }
-    public void setDirectory(String directory) {
-        this.directory = directory;
     }
 
     //MONGODB
@@ -94,9 +105,6 @@ public class WorkerRules {
     public int getDataType() {
         return dataType;
     }
-    public void setDataType(int dataType) {
-        this.dataType = dataType;
-    }
 
     //MAX/MIN ACTIONS
     public int getMinActions() {return minActions;}
@@ -109,4 +117,14 @@ public class WorkerRules {
     public int getBatchSize() {
         return batchSize;
     }
+
+    //Display options
+    public boolean isDisplay() {
+        return display;
+    }
+    public void setDisplay(boolean display) {
+        this.display = display;
+    }
+
+
 }

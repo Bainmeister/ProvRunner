@@ -1,7 +1,5 @@
 package uk.ac.ncl.provrun.dataMachine;
 
-import uk.ac.ncl.provrun.performance.ActionRecord;
-
 import java.io.File;
 
 /**
@@ -18,30 +16,28 @@ public class FileStore implements DataMachine {
         this.directory = CheckDirectory(directory);
     }
 
-    public FileStore(String directory){
-        //Ensure we have a valid string
-        if (directory == null || directory.equals(""))
-            throw new IllegalArgumentException("Missing filepath");
-
+    public FileStore(String directory) throws IllegalArgumentException{
         this.directory = CheckDirectory(new File(directory));
     }
 
-    public ActionRecord insert(int n){return new ActionRecord();
+    public boolean insert(int n){
+        return true;
     }
 
-    public ActionRecord  read(int n ){return new ActionRecord();
+    public boolean read(int n ){
+        return true;
     }
 
-    public ActionRecord  update(int n){
-        return new ActionRecord();
+    public boolean update(int n){
+        return true;
     }
 
-    public ActionRecord begin() {
-        return null;
+    public boolean begin() {
+        return true;
     }
 
-    public ActionRecord commit() {
-        return null;
+    public boolean commit() {
+        return true;
     }
 
     private File CheckDirectory(File f) {

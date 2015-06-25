@@ -1,6 +1,6 @@
 package uk.ac.ncl.provrun.worker;
 
-import uk.ac.ncl.provrun.performance.ActionRecord;
+import uk.ac.ncl.provrun.performance.ActionReport;
 
 /**
  * Created by simon on 23/06/15.
@@ -8,6 +8,6 @@ import uk.ac.ncl.provrun.performance.ActionRecord;
  */
 public interface WorkerFace {
 
-    ActionRecord doWork();
+    ActionReport doWork();
 
 }

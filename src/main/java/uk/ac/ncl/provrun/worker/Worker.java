@@ -5,8 +5,10 @@ import uk.ac.ncl.provrun.dataMachine.DataMachine;
 import uk.ac.ncl.provrun.dataMachine.DataONE;
 import uk.ac.ncl.provrun.dataMachine.FileStore;
 import uk.ac.ncl.provrun.dataMachine.Mongo;
-import uk.ac.ncl.provrun.performance.ActionRecord;
+import uk.ac.ncl.provrun.performance.ActionReport;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static uk.ac.ncl.provrun.dataMachine.DataType.*;
@@ -57,9 +59,11 @@ public class Worker implements WorkerFace{
                 machine = new DataONE();
                 break;
         }
+
+
     }
 
-    public ActionRecord doWork(){
+    public ActionReport doWork(){
         return doWork(rules.getBatches(),
                 rules.getBatchSize(),
                 rules.getReadChance(),
@@ -67,28 +71,48 @@ public class Worker implements WorkerFace{
                 rules.getUpdateChance());
     }
 
-    private ActionRecord doWork(int batches, int batchSize, int rChance, int iChance, int uChance) {
+    private ActionReport doWork(int batches, int batchSize, int rChance, int iChance, int uChance) {
 
-        ActionRecord record = new ActionRecord();
+        ActionReport report = new ActionReport();
 
-        //TODO actually use ActionRecord!
+        List<ActionReport>mesurement = new ArrayList<ActionReport>();
+
         //Each worker will do a number of batches of work. Each batch is seen as a number of grouped tasks.
         for (int i = 0; i<batches; i++){
 
+            int job = 0;
+            boolean success = false;
+
             machine.begin();  //Mark the start of the batch - this is relevant to some dbs
             for (int n = 0; n<batchSize; n++) {
-                switch (getJob(rChance,iChance,uChance)) {
-                    case INSERT: machine.insert(1);
-                    case READ:   machine.read(1);
-                    case UPDATE: machine.update(1);
+
+                job = getJob(rChance,iChance,uChance);
+                switch (job) {
+                    case INSERT:
+                        success = machine.insert(1);
+                        break;
+
+                    case READ:
+                        success = machine.read(1);
+                        break;
+
+                    case UPDATE:
+                        success = machine.update(1);
+                        break;
+
                     default:
                         throw new IllegalStateException("'getJob' has returned an Illegal value");
                 }
+
+                //Add this record to the action report.
+                report.add(job, success);
+
             }
             machine.commit(); //Mark the end of the batch - this is relevant for some dbs.
+
         }
 
-        return record;
+        return report;
     }
 
     /**

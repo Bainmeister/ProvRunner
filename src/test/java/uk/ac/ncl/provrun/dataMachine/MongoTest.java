@@ -7,27 +7,5 @@ import junit.framework.TestCase;
  */
 public class MongoTest extends TestCase {
 
-    public void testInsert() throws Exception {
-        Mongo machine = new Mongo();
-    }
 
-    public void testRead() throws Exception {
-
-    }
-
-    public void testUpdate() throws Exception {
-
-    }
-
-    public void testInsert1() throws Exception {
-
-    }
-
-    public void testRead1() throws Exception {
-
-    }
-
-    public void testUpdate1() throws Exception {
-
-    }
 }

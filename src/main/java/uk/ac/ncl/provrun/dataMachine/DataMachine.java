@@ -1,20 +1,18 @@
 package uk.ac.ncl.provrun.dataMachine;
 
-import uk.ac.ncl.provrun.performance.ActionRecord;
-
 /**
  * Created by simon on 24/06/15.
  */
 public interface DataMachine {
 
-    ActionRecord insert(int n);
+    boolean insert(int n);
 
-    ActionRecord read(int n );
+    boolean read(int n );
 
-    ActionRecord update(int n);
+    boolean update(int n);
 
-    ActionRecord begin();
+    boolean begin();
 
-    ActionRecord commit();
+    boolean commit();
 
 }

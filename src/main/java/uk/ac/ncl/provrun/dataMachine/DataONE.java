@@ -1,31 +1,29 @@
 package uk.ac.ncl.provrun.dataMachine;
 
-import uk.ac.ncl.provrun.performance.ActionRecord;
-
 /**
  * Created by simon on 24/06/15.
  */
 public class DataONE implements DataMachine {
 
     //TODO
-    public ActionRecord insert(int n){
-        return new ActionRecord();
+    public boolean insert(int n){
+        return true;
     }
 
-    public ActionRecord  read(int n){
-        return new ActionRecord();
+    public boolean read(int n){
+        return true;
     }
 
-    public ActionRecord  update(int n){
-        return new ActionRecord();
+    public boolean update(int n){
+        return true;
     }
 
-    public ActionRecord begin() {
-        return null;
+    public boolean begin() {
+        return true;
     }
 
-    public ActionRecord commit() {
-        return null;
+    public boolean commit() {
+        return true;
     }
 
 
