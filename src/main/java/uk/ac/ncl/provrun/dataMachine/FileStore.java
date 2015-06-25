@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -27,7 +28,7 @@ public class FileStore implements DataMachine {
     }
 
     public boolean insert(int n)  {
-
+        //TODO change this to Java 8 Files method
         for(int i = 0; i<n;i++){
 
             String filename = Editor.createFilename();
@@ -53,6 +54,7 @@ public class FileStore implements DataMachine {
 
     public boolean read(int n ){
 
+        //TODO improve this with Java 8... not too worried at the moment, just a prototype.
         File files[] = directory.listFiles();
 
         for(int i = 0; i<n;i++){
@@ -70,6 +72,24 @@ public class FileStore implements DataMachine {
     }
 
     public boolean update(int n){
+
+        File files[] = directory.listFiles();
+        for(int i =0; i<n;i++) {
+            try {
+                //Get a random file, take its first row value, add 1 to it!
+                //TODO make this look nicer!
+                String path = files[ThreadLocalRandom.current().nextInt(files.length - 1)].getAbsolutePath();
+                List<String> lines = Files.readAllLines(Paths.get(path));
+                String s = Editor.update(lines.get(0));
+                lines.clear();
+                lines.add(s);
+                Files.write(Paths.get(path), lines);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
         return true;
     }
 
