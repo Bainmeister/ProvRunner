@@ -20,13 +20,40 @@ public class WorkerRules {
     private final int updateChance;
     private final int totalChance;
 
+    private final int minActions;
+    private final int maxAxtions;
+
+    private final int batches;
+    private final int batchSize;
+
 
     //Some rules must not be changed while the object is being used.
-    public WorkerRules(int readChance, int insertChance, int updateChance){
+    public WorkerRules(int readChance, int insertChance, int updateChance, int minActions, int maxAxtions, int batchNumber, int batchSize){
         this.readChance = readChance;
         this.insertChance = insertChance;
         this.updateChance = updateChance;
         this.totalChance = readChance+insertChance+updateChance;
+
+        this.minActions = minActions;
+        this.maxAxtions = maxAxtions;
+
+        this.batches = batchNumber;
+        this.batchSize = batchSize;
+
+
+        //Do some validation
+
+        if (minActions < 0 || maxAxtions <= 0 || minActions > maxAxtions)
+            throw new IllegalArgumentException("Check maximum and minimum actions.");
+
+        if (readChance < 0 || insertChance < 0 || updateChance < 0)
+            throw new IllegalArgumentException("Chances cannot be less than 0");
+
+        if(totalChance == 0)
+            throw new IllegalArgumentException("Chances must sum to greater than 0");
+
+        if (batchNumber<=0 || batchSize <=0)
+            throw new IllegalArgumentException("Batch number/size must be greater than 0");
     }
 
     //READ chance
@@ -69,5 +96,17 @@ public class WorkerRules {
     }
     public void setDataType(int dataType) {
         this.dataType = dataType;
+    }
+
+    //MAX/MIN ACTIONS
+    public int getMinActions() {return minActions;}
+    public int getMaxAxtions() {return maxAxtions;}
+
+    //BATCH details
+    public int getBatches() {
+        return batches;
+    }
+    public int getBatchSize() {
+        return batchSize;
     }
 }

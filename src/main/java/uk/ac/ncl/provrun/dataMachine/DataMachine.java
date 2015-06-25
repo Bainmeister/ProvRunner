@@ -1,17 +1,20 @@
 package uk.ac.ncl.provrun.dataMachine;
 
 import uk.ac.ncl.provrun.performance.ActionRecord;
-import java.util.List;
 
 /**
  * Created by simon on 24/06/15.
  */
 public interface DataMachine {
 
-    ActionRecord insert(int i);
+    ActionRecord insert(int n);
 
-    ActionRecord read(List<String> k);
+    ActionRecord read(int n );
 
-    ActionRecord update(List<String> k);
+    ActionRecord update(int n);
+
+    ActionRecord begin();
+
+    ActionRecord commit();
 
 }
