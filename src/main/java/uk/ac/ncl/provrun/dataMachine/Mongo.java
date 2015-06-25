@@ -17,10 +17,13 @@ public class Mongo implements DataMachine {
         this.connection = connection;
     }
 
+    //TODO
     public ActionRecord insert(int i){return new ActionRecord();}
 
+    //TODO
     public ActionRecord  read(List<String> k){return new ActionRecord();}
 
+    //TODO
     public ActionRecord  update(List<String> k){return new ActionRecord();}
 
 }

@@ -10,7 +10,7 @@ public class WorkerTest extends TestCase {
     //TODO populate rules and test.
     public void testConstruction() throws Exception {
         Worker f;
-        f = new Worker(new WorkerRules());
+        f = new Worker(new WorkerRules(1,1,1));
         assertNotNull(f);
     }
 

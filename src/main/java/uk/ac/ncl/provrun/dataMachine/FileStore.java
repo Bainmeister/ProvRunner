@@ -26,10 +26,13 @@ public class FileStore implements DataMachine {
         this.directory = CheckDirectory(new File(directory));
     }
 
+    //TODO
     public ActionRecord insert(int i){return new ActionRecord();}
 
+    //TODO
     public ActionRecord  read(List<String> k){return new ActionRecord();}
 
+    //TODO
     public ActionRecord  update(List<String> k){return new ActionRecord();}
 
     private File CheckDirectory(File f){
