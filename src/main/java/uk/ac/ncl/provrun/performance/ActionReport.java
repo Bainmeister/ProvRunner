@@ -43,7 +43,7 @@ public class ActionReport {
 
         System.out.println("Successful: " + success);
         System.out.println("Failures: " + failure);
-        System.out.println("INSERTS: " + insert + " READS: " + read + " UPDATES: " + update );
+        System.out.println("READS: " + read + " INSERTS: " + insert +  " UPDATES: " + update );
 
     }
 

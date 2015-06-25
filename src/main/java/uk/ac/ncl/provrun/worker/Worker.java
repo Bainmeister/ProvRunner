@@ -1,5 +1,6 @@
 package uk.ac.ncl.provrun.worker;
 
+import uk.ac.ncl.provrun.connection.DataConnection;
 import uk.ac.ncl.provrun.connection.MongoConnection;
 import uk.ac.ncl.provrun.dataMachine.DataMachine;
 import uk.ac.ncl.provrun.dataMachine.DataONE;
@@ -30,22 +31,20 @@ public class Worker implements WorkerFace{
     private DataMachine machine;
     private WorkerRules rules;
 
+    private DataConnection existingConnection;
 
     /**
      * We want either a directory to scan, or a file list.
      */
     private Worker(){}
 
-    /**
-     *
-     * @param ruleset
-     */
 
-    //TODO - it is possible that we are using the same data connection across multiple worker, create a constructor that reflects this.
+    public Worker(WorkerRules r){
+        this.rules = r;
+        machine = setupMachine(r);
+    }
 
-    public Worker(WorkerRules ruleset){
-
-        this.rules = ruleset;
+    DataMachine setupMachine(WorkerRules rules){
 
         //Set up the relevant machine to work from.
         switch (rules.getDataType()) {
@@ -59,8 +58,7 @@ public class Worker implements WorkerFace{
                 machine = new DataONE();
                 break;
         }
-
-
+        return machine;
     }
 
     public ActionReport doWork(){
