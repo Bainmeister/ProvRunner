@@ -1,5 +1,7 @@
 package uk.ac.ncl.provrun.editor;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Created by simon on 24/06/15.
  */
@@ -15,4 +17,12 @@ public class Editor {
         return String.valueOf(Integer.parseInt(val) + 1);
     }
 
+    public static String createFilename() {
+
+        String filename = System.currentTimeMillis() + "_"
+                + ThreadLocalRandom.current().nextInt(10) + ""
+                + ThreadLocalRandom.current().nextInt(10);
+
+        return filename.hashCode()+"";
+    }
 }

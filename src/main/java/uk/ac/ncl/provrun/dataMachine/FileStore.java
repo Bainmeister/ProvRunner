@@ -1,13 +1,19 @@
 package uk.ac.ncl.provrun.dataMachine;
 
+import uk.ac.ncl.provrun.editor.Editor;
+
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by simon on 24/06/15.
  */
 public class FileStore implements DataMachine {
 
-    //TODO
 
     //This file object should have all the info we need to add, update and read files.
     private File directory;
@@ -20,11 +26,46 @@ public class FileStore implements DataMachine {
         this.directory = CheckDirectory(new File(directory));
     }
 
-    public boolean insert(int n){
+    public boolean insert(int n)  {
+
+        for(int i = 0; i<n;i++){
+
+            String filename = Editor.createFilename();
+            File f = new File(directory.getAbsolutePath(),filename+".txt");
+            FileWriter filewriter = null;
+
+            //Create the file and write to it!
+            if(!f.exists())
+                try {
+                    f.createNewFile();
+                    filewriter = new FileWriter(f);
+                    filewriter.append(Editor.create());
+                    filewriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+        }
+
         return true;
     }
 
+
     public boolean read(int n ){
+
+        File files[] = directory.listFiles();
+
+        for(int i = 0; i<n;i++){
+            try {
+                //Get a random file path form the files in the directory
+                String path = files[ThreadLocalRandom.current().nextInt(n)].getAbsolutePath();
+                //Don't do anything, just read the file!
+                new String(Files.readAllBytes(Paths.get(path)));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
         return true;
     }
 

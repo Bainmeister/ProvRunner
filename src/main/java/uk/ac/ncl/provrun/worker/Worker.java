@@ -42,6 +42,7 @@ public class Worker implements WorkerFace{
     public Worker(WorkerRules r){
         this.rules = r;
         machine = setupMachine(r);
+
     }
 
     DataMachine setupMachine(WorkerRules rules){

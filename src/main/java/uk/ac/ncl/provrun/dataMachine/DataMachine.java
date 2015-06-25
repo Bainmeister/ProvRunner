@@ -7,7 +7,7 @@ public interface DataMachine {
 
     boolean insert(int n);
 
-    boolean read(int n );
+    boolean read(int n);
 
     boolean update(int n);
 
