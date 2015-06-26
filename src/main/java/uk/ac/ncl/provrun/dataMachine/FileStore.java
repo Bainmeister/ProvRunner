@@ -28,24 +28,23 @@ public class FileStore implements DataMachine {
     }
 
     public boolean insert(int n)  {
-        //TODO change this to Java 8 Files method
+
         for(int i = 0; i<n;i++){
 
             String filename = Editor.createFilename();
             File f = new File(directory.getAbsolutePath(),filename+".txt");
-            FileWriter filewriter = null;
 
             //Create the file and write to it!
-            if(!f.exists())
+            if(!f.exists()) {
                 try {
                     f.createNewFile();
-                    filewriter = new FileWriter(f);
-                    filewriter.append(Editor.create());
-                    filewriter.close();
+                    FileWriter filewriter = new FileWriter(f);
+                    filewriter.append(Editor.create()).close();
                 } catch (IOException e) {
                     e.printStackTrace();
                     return false;
                 }
+            }
         }
 
         return true;
@@ -54,17 +53,20 @@ public class FileStore implements DataMachine {
 
     public boolean read(int n ){
 
-        //TODO improve this with Java 8... not too worried at the moment, just a prototype.
         File files[] = directory.listFiles();
+        if (files.length <= 0)
+            return true;
 
         for(int i = 0; i<n;i++){
             try {
+
                 //Get a random file path form the files in the directory
                 String path = files[ThreadLocalRandom.current().nextInt(n)].getAbsolutePath();
+
                 //Don't do anything, just read the file!
                 new String(Files.readAllBytes(Paths.get(path)));
             } catch (IOException e) {
-                e.printStackTrace();
+               // e.printStackTrace();
                 return false;
             }
         }
@@ -74,15 +76,23 @@ public class FileStore implements DataMachine {
     public boolean update(int n){
 
         File files[] = directory.listFiles();
+        if (files.length <= 0)
+            return true;
+
         for(int i =0; i<n;i++) {
             try {
-                //Get a random file, take its first row value, add 1 to it!
-                //TODO make this look nicer!
-                String path = files[ThreadLocalRandom.current().nextInt(files.length - 1)].getAbsolutePath();
+
+                //Get the path of a random file in the file list
+                String path = files[ThreadLocalRandom.current().nextInt(files.length)].getAbsolutePath();
+
+                //Get all lines from that file (technically we just need the first)
+                //NOTE: Files should be pretty small, so lets not worry about memory!
                 List<String> lines = Files.readAllLines(Paths.get(path));
-                String s = Editor.update(lines.get(0));
-                lines.clear();
-                lines.add(s);
+
+                //Replace the top line
+                lines.set(0,Editor.update(lines.get(0)));
+
+                //Write the file back
                 Files.write(Paths.get(path), lines);
 
             } catch (IOException e) {
